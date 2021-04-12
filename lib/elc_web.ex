@@ -90,6 +90,8 @@ defmodule ElcWeb do
       import ElcWeb.ErrorHelpers
       import ElcWeb.Gettext
       alias ElcWeb.Router.Helpers, as: Routes
+
+      import ElcWeb.MountHelpers
     end
   end
 
