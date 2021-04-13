@@ -4,6 +4,10 @@ defmodule ElcWeb.PageLive do
 
   @impl true
   def mount(_params, session, socket) do
+    if connected?(socket) do
+      Presence.subscribe()
+    end
+
     {:ok,
      socket
      |> assign_defaults(session)
@@ -13,6 +17,12 @@ defmodule ElcWeb.PageLive do
   @impl true
   def handle_params(_url, _params, socket) do
     maybe_track_user(socket)
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info(%{event: "presence_diff"}, socket) do
+    send_update(ElcWeb.OnlineUsersComponent, id: socket.assigns.online_users_component_id)
     {:noreply, socket}
   end
 
