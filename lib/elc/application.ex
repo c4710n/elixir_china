@@ -13,6 +13,8 @@ defmodule Elc.Application do
       ElcWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Elc.PubSub},
+      # Start the Presence system
+      ElcWeb.Presence,
       # Start the Endpoint (http/https)
       ElcWeb.Endpoint
       # Start a worker by calling: Elc.Worker.start_link(arg)
