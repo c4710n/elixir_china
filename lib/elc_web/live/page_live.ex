@@ -1,39 +1,24 @@
 defmodule ElcWeb.PageLive do
   use ElcWeb, :live_view
+  alias ElcWeb.Presence
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{})}
+  def mount(_params, session, socket) do
+    {:ok,
+     socket
+     |> assign_defaults(session)
+     |> assign(:online_users_component_id, "online_users")}
   end
 
   @impl true
-  def handle_event("suggest", %{"q" => query}, socket) do
-    {:noreply, assign(socket, results: search(query), query: query)}
+  def handle_params(_url, _params, socket) do
+    maybe_track_user(socket)
+    {:noreply, socket}
   end
 
-  @impl true
-  def handle_event("search", %{"q" => query}, socket) do
-    case search(query) do
-      %{^query => vsn} ->
-        {:noreply, redirect(socket, external: "https://hexdocs.pm/#{query}/#{vsn}")}
-
-      _ ->
-        {:noreply,
-         socket
-         |> put_flash(:error, "No dependencies found matching \"#{query}\"")
-         |> assign(results: %{}, query: query)}
+  defp maybe_track_user(socket) do
+    if connected?(socket) do
+      {:ok, _} = Presence.track_user(self(), socket.assigns.browser_id)
     end
-  end
-
-  defp search(query) do
-    if not ElcWeb.Endpoint.config(:code_reloader) do
-      raise "action disabled when not in development"
-    end
-
-    for {app, desc, vsn} <- Application.started_applications(),
-        app = to_string(app),
-        String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
-        into: %{},
-        do: {app, vsn}
   end
 end
