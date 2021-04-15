@@ -13,7 +13,7 @@ defmodule ElcWeb.OnlineUsersComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <p>Online User <%= length @online_users %></p>
+    <p class="text-neutral-500">实时在线 <%= length @online_users %></p>
     """
   end
 
