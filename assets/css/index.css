@@ -8,6 +8,7 @@
 @import './phoenix-form.css';
 
 @import './ext-prose.css';
+@import './page.css';
 
 /* hide iframe of phoenix-live-reload */
 iframe[hidden] {

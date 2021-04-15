@@ -23,11 +23,15 @@ module.exports = {
       white: colors.white,
       black: colors.black,
 
-      primary: colors.rose,
+      primary: colors.indigo,
       neutral: colors.blueGray,
       info: colors.blue,
       success: colors.green,
       danger: colors.red,
+
+      basis: {
+        DEFAULT: '#4e2a8e',
+      },
     },
     extend: {
       fontFamily: {

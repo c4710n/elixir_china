@@ -1,0 +1,30 @@
+@layer components {
+  .heading-2 {
+    @apply inline-block font-medium text-2xl;
+    background-image: linear-gradient(
+      120deg,
+      theme('colors.primary.100') 0%,
+      theme('colors.primary.300') 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.3em;
+    background-position: 0 88%;
+  }
+
+  .inline-link {
+    color: theme('colors.basis.DEFAULT');
+    background-image: linear-gradient(
+      120deg,
+      theme('colors.primary.100') 0%,
+      theme('colors.primary.300') 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in-out;
+  }
+
+  .inline-link:hover {
+    background-size: 100% 0.3em;
+  }
+}
