@@ -1,0 +1,11 @@
+name: Clean Up
+on: [registry_package]
+jobs:
+  Delete-Old-Packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: smartsquaregmbh/delete-old-packages@v0.3.1
+        with:
+          keep: 5
+          names: |
+            elixir-china
