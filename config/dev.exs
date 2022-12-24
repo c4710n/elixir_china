@@ -4,8 +4,7 @@ import Config
 # debugging and code reloading.
 #
 # The watchers configuration can be used to run external
-# watchers to your application. For example, we use it
-# with esbuild to bundle .js and .css sources.
+# watchers to your application.
 config :elixir_china, ElixirChinaWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
@@ -15,8 +14,11 @@ config :elixir_china, ElixirChinaWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "6+BFmrJgpvtFofXVlcYAQZNmzGGL9/eyxCG1lz5Nnjlh+5UxrLaL/iDoHPvcebI8",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+    npm: [
+      "run",
+      "watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support

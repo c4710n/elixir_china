@@ -39,8 +39,6 @@ defmodule ElixirChina.MixProject do
       {:heroicons, "~> 0.5"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.7.2"},
-      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
@@ -56,8 +54,8 @@ defmodule ElixirChina.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      setup: ["deps.get", "cmd npm install --prefix assets"],
+      "assets.deploy": ["cmd npm run deploy --prefix assets", "phx.digest"]
     ]
   end
 end
