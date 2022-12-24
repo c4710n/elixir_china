@@ -8,14 +8,10 @@ defmodule ElixirChina.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
       ElixirChinaWeb.Telemetry,
-      # Start the PubSub system
       {Phoenix.PubSub, name: ElixirChina.PubSub},
-      # Start the Endpoint (http/https)
+      ElixirChinaWeb.Presence,
       ElixirChinaWeb.Endpoint
-      # Start a worker by calling: ElixirChina.Worker.start_link(arg)
-      # {ElixirChina.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
