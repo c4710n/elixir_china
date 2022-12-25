@@ -14,8 +14,8 @@ module.exports = {
         mono: ['JetBrains MonoVariable', ...defaultTheme.fontFamily.mono],
       },
       colors: {
-        brand: '#FD4F00',
-        primary: colors.rose,
+        brand: '#4e2a8e',
+        primary: colors.indigo,
         neutral: colors.slate,
         info: colors.blue,
         success: colors.green,

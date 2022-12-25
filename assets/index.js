@@ -8,4 +8,4 @@ import './lib/tailwind'
 import './lib/phoenix'
 import './lib/phoenix_live_view'
 
-console.log('Welcome to PETAL-starter.')
+import './pages/home'
