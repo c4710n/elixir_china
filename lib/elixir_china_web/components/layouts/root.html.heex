@@ -15,24 +15,22 @@
   <body class="antialiased">
     <%= @inner_content %>
 
-    <footer class="font-mono text-xs py-24 text-center text-neutral-400">
-      <.link
-        class="inline-link"
-        href="https://phoenixframework.org/"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Phoenix
-      </.link>
-      ✕
-      <.link
-        class="inline-link"
-        href="https://github.com/c4710n"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        c4710n
-      </.link>
+    <footer class="font-mono text-xs py-24 text-center text-neutral-400 space-y-3">
+      <p>
+        <.external_link class="inline-link" href="https://phoenixframework.org/">
+          Phoenix
+        </.external_link>
+        ✕
+        <.external_link class="inline-link" href="https://github.com/c4710n">
+          c4710n
+        </.external_link>
+      </p>
+      <p>
+        Hosted on
+        <.external_link class="inline-link" href="https://fly.io">
+          Fly.io
+        </.external_link>
+      </p>
     </footer>
   </body>
 </html>
