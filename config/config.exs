@@ -11,7 +11,7 @@ import Config
 config :elixir_china, ElixirChinaWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: ElixirChinaWeb.ErrorHTML, json: ElixirChinaWeb.ErrorJSON],
+    formats: [html: ElixirChinaWeb.ErrorHTML],
     layout: false
   ],
   pubsub_server: ElixirChina.PubSub,

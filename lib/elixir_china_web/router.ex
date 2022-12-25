@@ -10,20 +10,11 @@ defmodule ElixirChinaWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", ElixirChinaWeb do
     pipe_through :browser
 
     live "/", HomeLive
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", ElixirChinaWeb do
-  #   pipe_through :api
-  # end
 
   # Enable LiveDashboard in development
   if Application.compile_env(:elixir_china, :dev_routes) do

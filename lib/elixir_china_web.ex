@@ -40,7 +40,7 @@ defmodule ElixirChinaWeb do
     quote do
       use Phoenix.Controller,
         namespace: ElixirChinaWeb,
-        formats: [:html, :json],
+        formats: [:html],
         layouts: [html: ElixirChinaWeb.Layouts]
 
       import Plug.Conn
