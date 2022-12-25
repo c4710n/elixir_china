@@ -11,7 +11,6 @@ defmodule ElixirChinaWeb.HomeLive do
 
     {:ok,
      socket
-     |> assign(:browser_id, "fake_browser_id")
      |> assign(:online_visitor_component_id, "online_visitors"), layout: false}
   end
 

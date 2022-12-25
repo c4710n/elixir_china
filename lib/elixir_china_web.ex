@@ -54,6 +54,8 @@ defmodule ElixirChinaWeb do
       use Phoenix.LiveView,
         layout: {ElixirChinaWeb.Layouts, :app}
 
+      on_mount ElixirChinaWeb.BrowserInfo
+
       unquote(html_helpers())
     end
   end
