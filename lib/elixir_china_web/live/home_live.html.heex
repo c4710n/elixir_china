@@ -1,0 +1,370 @@
+<section class="pt-40 pb-24 md:pt-36 text-center">
+  <img src={~p"/images/elixir-lang-icon.svg"} alt="Elixir Logo" class="w-32 md:w-40 mx-auto" />
+
+  <h1 class="mt-4 font-mono text-5xl tracking-tight text-brand md:mt-6 md:text-6xl">
+    elixir
+  </h1>
+  <p class="mt-4 text-neutral-500 text-sm md:text-base">没有银弹，但有灵药</p>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">语言特性</h2>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        函数式编程
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        代码简洁，易于理解
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        动态、强类型
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        亦有灵动，亦有方圆
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        轻松拓展
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        拓展语言，轻松自如
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        兼容 Erlang/OTP
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        无缝调用，毫无损耗
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">其他特性</h2>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        稳定可靠的底层平台
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        Elixir 以工业级的 Erlang VM 为基础，拥有高容错、分布式、低延时、热更新等特性，是编写高可用性、高伸缩性、高并发性、软实时性应用的极佳选择。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        出色的开发配套工具
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <ul>
+          <li>
+            REPL -
+            <.external_link class="inline-link" href="https://hexdocs.pm/iex">IEx</.external_link>
+          </li>
+          <li>
+            构建工具 -
+            <.external_link class="inline-link" href="https://hexdocs.pm/mix">Mix</.external_link>
+          </li>
+          <li>
+            包仓库 -
+            <.external_link class="inline-link" href="https://hex.pm/">Hex</.external_link>
+          </li>
+          <li>
+            文档中心 -
+            <.external_link class="inline-link" href="https://hexdocs.pm/">
+              HexDocs
+            </.external_link>
+          </li>
+          <li>
+            测试框架 -
+            <.external_link class="inline-link" href="https://hexdocs.pm/ex_unit">
+              ExUnit
+            </.external_link>
+          </li>
+        </ul>
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        与其他语言协作
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        通过
+        <.external_link class="inline-link" href="https://www.erlang.org/doc/tutorial/nif.html">
+          NIF
+        </.external_link>
+        或 Port 与其他语言协作。
+        <ul>
+          <li>C / C++</li>
+          <li>
+            Rust -
+            <.external_link class="inline-link" href="https://github.com/rusterlium/rustler">
+              Rustler
+            </.external_link>
+            /
+            <.external_link
+              class="inline-link"
+              href="https://github.com/philss/rustler_precompiled"
+            >
+              Rustler Precompiled
+            </.external_link>
+          </li>
+          <li>……</li>
+        </ul>
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">应用领域</h2>
+  <p class="mt-2 text-sm text-neutral-500">
+    成功应用于诸多领域
+  </p>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        Web 开发
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-link" href="https://github.com/phoenixframework/phoenix">
+          Phoenix
+        </.external_link>
+        作为 Elixir 生态内常用 Web 框架，开发效率极高。
+        配合
+        <.external_link class="inline-link" href="https://github.com/absinthe-graphql/absinthe">
+          Absinthe
+        </.external_link>，
+        也可用于 GraphQL API 的开发。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        嵌入式开发
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-link" href="https://github.com/nerves-project/nerves">
+          Nerves
+        </.external_link>
+        为嵌入式开发提供了稳定、可靠、高效的工具链。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        数据处理
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-link" href="https://github.com/dashbitco/broadway">
+          Broadway
+        </.external_link>
+        与
+        <.external_link class="inline-link" href="https://github.com/membraneframework">
+          Membrane
+        </.external_link>
+        为大数据以及多媒体处理提供了可能。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        机器学习
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-link" href="https://github.com/elixir-nx/nx">
+          Nx
+        </.external_link>
+        为机器学习提供了基础设施，同时衍生出了
+        <.external_link class="inline-link" href="https://github.com/elixir-nx/scholar">
+          Scholar
+        </.external_link>
+        、
+        <.external_link class="inline-link" href="https://github.com/elixir-nx/axon">
+          Axon
+        </.external_link>
+        、
+        <.external_link class="inline-link" href="https://github.com/elixir-nx/bumblebee">
+          Bumblebee
+        </.external_link>
+        等诸多优秀项目。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        更多可能
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-link" href="https://github.com/livebook-dev/livebook">
+          LiveBook
+        </.external_link>
+        、
+        <.external_link class="inline-link" href="https://github.com/lumen/lumen">
+          Lumen
+        </.external_link>
+        为 Elixir 在更多领域闪光提供了可能。
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">谁在使用？</h2>
+  <p class="mt-2 text-sm text-neutral-500">
+    用了的，都说好
+  </p>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://elixir-companies.com/"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        使用 Elixir 的公司
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        全球
+      </dd>
+    </.external_link>
+
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://github.com/elixir-cn/elixir-china-companies"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        使用 Elixir 的公司
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        中国
+      </dd>
+    </.external_link>
+
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://elixir-lang.org/cases.html"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        使用案例
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        来自 Elixir 官网
+      </dd>
+    </.external_link>
+
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://sponsors.elixirforum.com/"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        ElixirForum 赞助商
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        饮水思源
+      </dd>
+    </.external_link>
+  </dl>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">开始学习</h2>
+  <p class="mt-2 text-sm text-neutral-500">学而不厌，诲人不倦</p>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://elixir-lang.org/learning.html"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        官方入门教程
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        从这里开始
+      </dd>
+    </.external_link>
+
+    <.external_link
+      class="bg-neutral-50 rounded-lg px-6 py-8 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+      href="https://pragprog.com/categories/elixir-phoenix-and-otp/"
+    >
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        The Pragmatic Bookshelf
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        了解更多主题
+      </dd>
+    </.external_link>
+  </dl>
+</section>
+
+<section class="pt-8 py-16 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">创造、创造、创造</h2>
+  <p class="mt-2 text-sm text-neutral-500">
+    创造更多价值
+  </p>
+  <div class="mt-8 text-xl">
+    用 Elixir 创造有价值的产品，向世界展示它们。
+  </div>
+</section>
+
+<section class="pt-8 text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6">
+  <h2 class="heading-2">加入全球化社区</h2>
+  <p class="mt-2 text-sm text-neutral-500">
+    去更广阔的天地
+  </p>
+  <dl class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        <.external_link class="inline-block" href="https://elixirforum.com/">
+          Elixir Forum
+        </.external_link>
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        提供了国际化的问答交流平台。 <br /> Erlang/OTP 的维护者、Elixir 的维护者、专业的开发者、热情的爱好者，这里应有尽有。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        <.external_link class="inline-block" href="https://github.com/elixir-lang">
+          GitHub
+        </.external_link>
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        提供了国际化的代码交流平台。 <br /> 可以向社区贡献代码，可以为官方文档添砖加瓦。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        不要运营中文线上论坛
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        <.external_link class="inline-block" href="https://elixirforum.com/">
+          Elixir Forum
+        </.external_link>
+        已经提供了交流的平台。额外的论坛会分散受众注意力，削弱社区凝聚力。
+      </dd>
+    </div>
+
+    <div class="bg-neutral-50 rounded-lg px-6 py-8">
+      <dt class="text-md leading-6 font-medium text-neutral-900">
+        不要翻译中文文档
+      </dt>
+      <dd class="mt-2 text-sm text-neutral-500">
+        技术领域不同于文学领域，翻译所得的内容会很快过时，翻译者也会渐渐丧失维护的热情。
+        会留下的，只有支离破碎的、过时的内容。
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<.live_component module={OnlineVisitorComponent} id={@online_visitor_component_id} />

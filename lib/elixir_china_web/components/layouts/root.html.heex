@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" style="scrollbar-gutter: stable;">
+<html lang="zh-cmn-Hans">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title suffix=" · Phoenix Framework">
-      <%= assigns[:page_title] || "ElixirChina" %>
+    <.live_title suffix="">
+      <%= assigns[:page_title] || "Elixir 中国" %>
     </.live_title>
+    <meta name="description" content="促进中国社区与国际社区接轨。" />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white antialiased">
+  <body class="antialiased">
     <%= @inner_content %>
+
+    <footer class="font-mono text-xs py-24 text-center text-neutral-400">
+      <.link
+        class="inline-link"
+        href="https://phoenixframework.org/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Phoenix
+      </.link>
+      ✕
+      <.link
+        class="inline-link"
+        href="https://github.com/c4710n"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        c4710n
+      </.link>
+    </footer>
   </body>
 </html>

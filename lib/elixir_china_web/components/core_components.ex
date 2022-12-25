@@ -14,6 +14,21 @@ defmodule ElixirChinaWeb.CoreComponents do
   alias Phoenix.LiveView.JS
 
   @doc """
+  Renders an external link.
+  """
+
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def external_link(assigns) do
+    ~H"""
+    <.link rel="noopener noreferrer" target="_blank" {@rest}>
+      <%= render_slot(@inner_block) %>
+    </.link>
+    """
+  end
+
+  @doc """
   Renders a modal.
 
   ## Examples
@@ -161,12 +176,7 @@ defmodule ElixirChinaWeb.CoreComponents do
         <%= @title %>
       </p>
       <p class="mt-2 text-[0.8125rem] leading-5"><%= msg %></p>
-      <button
-        :if={@close}
-        type="button"
-        class="group absolute top-2 right-1 p-2"
-        aria-label="close"
-      >
+      <button :if={@close} type="button" class="group absolute top-2 right-1 p-2" aria-label="close">
         <Heroicons.x_mark solid class="h-5 w-5 stroke-current opacity-40 group-hover:opacity-70" />
       </button>
     </div>
