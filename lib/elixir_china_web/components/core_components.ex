@@ -17,14 +17,15 @@ defmodule ElixirChinaWeb.CoreComponents do
   Renders an external link.
   """
 
+  attr :href, :string, required: true
   attr :rest, :global
   slot :inner_block, required: true
 
   def external_link(assigns) do
     ~H"""
-    <.link rel="noopener noreferrer" target="_blank" {@rest}>
+    <a rel="noopener noreferrer" target="_blank" href={@href} {@rest}>
       <%= render_slot(@inner_block) %>
-    </.link>
+    </a>
     """
   end
 
