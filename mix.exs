@@ -60,8 +60,10 @@ defmodule ElixirChina.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "cmd npm install --prefix assets"],
-      "assets.deploy": ["cmd npm run deploy --prefix assets", "phx.digest"]
+      setup: ["deps.get", "assets.setup"],
+      "assets.setup": ["cmd npm install --prefix assets"],
+      "assets.build": ["cmd npm run build --prefix assets"],
+      "assets.deploy": ["cmd npm run build --prefix assets", "phx.digest"]
     ]
   end
 end
