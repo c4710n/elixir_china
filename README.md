@@ -1,5 +1,7 @@
 # ElixirChina
 
+> Promot Elixir in China, and guide more chinese developers to international community.
+
 To start your Phoenix server:
 
 * Run `mix setup` to install and setup dependencies
