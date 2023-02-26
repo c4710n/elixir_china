@@ -14,13 +14,17 @@
   </head>
   <body class={[
     "w-full min-h-screen",
-    "flex justify-center items-center",
+    "flex flex-col justify-center items-center space-y-4",
     "antialiased"
   ]}>
-    <h1 class="text-lg text-neutral-400 font-medium font-mono">
+    <h1 class="text-xl text-neutral-500 font-medium font-mono">
       <span><%= @status %></span>
       <span class="mx-2">|</span>
       <span class="uppercase"><%= @message %></span>
     </h1>
+    <a class="flex items-center space-x-2 text-neutral-500 nav-link" href={~p"/"}>
+      <Heroicons.arrow_left class="w-4 h-4" />
+      <span>back to home page</span>
+    </a>
   </body>
 </html>
