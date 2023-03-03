@@ -4,7 +4,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PHX_HOST = "elixir-china.club"
+  PHX_HOST = "elixir-china.rising.land"
   PORT = "8080"
 
 [experimental]
