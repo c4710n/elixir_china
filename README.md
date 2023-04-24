@@ -13,7 +13,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Online Version
 
-Visit <https://elixir-china.club>.
+Visit <https://elixir-china.rising.land/>.
 
 ## Learn more
 
