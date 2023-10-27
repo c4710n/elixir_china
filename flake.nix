@@ -2,117 +2,147 @@
   description = "A flake for developing and deploying current project.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
-    flake-utils.url = "github:numtide/flake-utils";
-    nix-npm-buildpackage.url = "github:serokell/nix-npm-buildpackage";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-npm-buildpackage = {
+      url = "github:serokell/nix-npm-buildpackage";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nix-npm-buildpackage }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
-
-        erlang = pkgs.beam.packages.erlangR25;
-        elixir = erlang.elixir_1_14;
-        nodejs = pkgs.nodejs-16_x;
-
-        beamPackages = erlang;
-        nodePackages = pkgs.callPackage nix-npm-buildpackage { inherit nodejs; };
-
-        pname = "elixir_china";
-        version = "0.1.0";
-        src = ./.;
-        srcAssets = ./assets;
-
-        fetchMixDeps = attrs: beamPackages.fetchMixDeps ({
-          inherit elixir;
-
-          pname = "${pname}-mix-deps";
-          inherit src version;
-        } // attrs);
-
-        fetchNpmDeps = attrs: nodePackages.mkNodeModules ({
-          pname = "${pname}-npm-deps";
-          src = srcAssets;
-          inherit version;
-        } // attrs);
-
-        mkMixRelease = attrs: beamPackages.mixRelease ({
-          inherit elixir;
-
-          inherit pname src version;
-          nativeBuildInputs = [ nodejs ];
-        } // attrs);
-
-        shell = with pkgs; mkShell {
+  outputs = { self, nixpkgs, nix-npm-buildpackage }:
+    let
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      overlays = [
+        (final: prev: {
+          erlang = prev.beam.packages.erlang_25;
+          elixir = prev.beam.packages.erlang_25.elixir_1_14;
+          nodejs = prev.nodejs_18;
+        })
+        nix-npm-buildpackage.overlays.default
+      ];
+      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
+        pkgs = import nixpkgs { inherit system overlays; };
+      });
+    in
+    {
+      devShells = forEachSupportedSystem ({ pkgs }: with pkgs; {
+        default = mkShell {
           buildInputs = [
             elixir
             nodejs
           ]
           ++ lib.optionals stdenv.isLinux [
-            # For ExUnit Notifier on Linux.
+            # For ExUnit notifier
             libnotify
 
-            # For file_system on Linux.
+            # for package - file_system
             inotify-tools
           ]
           ++ lib.optionals stdenv.isDarwin [
-            # For ExUnit Notifier on macOS.
+            # for ExUnit Notifier
             terminal-notifier
 
-            # For file_system on macOS.
+            # for package - file_system
             darwin.apple_sdk.frameworks.CoreFoundation
             darwin.apple_sdk.frameworks.CoreServices
           ];
 
           shellHook = ''
-            # allows mix to work on the local directory
+            # limit mix to current project
             mkdir -p .nix-mix
             mkdir -p .nix-hex
             export MIX_HOME=$PWD/.nix-mix
             export HEX_HOME=$PWD/.nix-hex
             export ERL_LIBS=$HEX_HOME/lib/erlang/lib
 
-            # concat PATH
+            # rewire executables
             export PATH=$MIX_HOME/bin:$PATH
             export PATH=$MIX_HOME/escripts:$PATH
             export PATH=$HEX_HOME/bin:$PATH
 
-            # enable history for IEx
-            export ERL_AFLAGS="-kernel shell_history enabled"
+            # limit history to current project
+            export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_path '\"$PWD/.erlang-history\"'"
           '';
         };
+      });
 
-        release =
-          let
-            mixFodDeps = fetchMixDeps {
-              sha256 = "sha256-aipc631/WUF39RBQk5V4A0gKoPL7x+NJS6Nux1hbiQ4=";
+      packages = forEachSupportedSystem ({ pkgs }:
+        with pkgs;
+        let
+          pname = "elixir_china";
+          version = "0.1.0";
+          src = nix-gitignore.gitignoreSource [
+            "/flake.nix"
+            "/flake.lock"
+            "/fly.toml"
+          ] ./.;
+          srcAssets = ./assets;
+        in
+        rec {
+          default = app;
+          app =
+            let
+              mixFodDeps = beamPackages.fetchMixDeps {
+                pname = "${pname}-mix-deps";
+                inherit src version;
+                sha256 = "sha256-N83uiNciSf56Gl0EdVj0vHEiw0yNsKFSqEwG/zYNQC0=";
+              };
+
+              npmDeps = (mkNodeModules {
+                pname = "${pname}-npm-deps";
+                src = srcAssets;
+                inherit version;
+              }).overrideAttrs (self: {
+                buildCommand = self.buildCommand + ''
+                  for package in phoenix phoenix_html phoenix_live_view; do
+                    rm -rf $out/node_modules/$package
+                    cp -r ${mixFodDeps}/$package $out/node_modules/
+                  done
+                '';
+              });
+            in
+            beamPackages.mixRelease {
+              inherit pname version src;
+              inherit mixFodDeps;
+
+              nativeBuildInputs = [ nodejs ];
+
+              postBuild = ''
+                ln -sf ${npmDeps}/node_modules assets/node_modules
+                mix assets.deploy
+              '';
             };
 
-            npmFodDeps = (fetchNpmDeps { }).overrideAttrs (self: {
-              buildCommand = self.buildCommand + ''
-                for package in phoenix phoenix_html phoenix_live_view; do
-                  rm -f $out/node_modules/$package
-                  cp -r ${mixFodDeps}/$package $out/node_modules/
-                done
-              '';
-            });
-          in
-          mkMixRelease {
-            inherit mixFodDeps;
+          dockerImage = dockerTools.buildLayeredImage {
+            name = pname;
+            tag = "latest";
 
-            postBuild = ''
-              ln -sf ${npmFodDeps}/node_modules assets/node_modules
+            contents = [
+              # requirements of mix release scripts
+              coreutils
+              gnused
+              gnugrep
+              gawk
 
-              # set HOME env to remove the error about non-writable /homeless-shelter dir
-              HOME=$(pwd) mix assets.deploy
-            '';
+              # for healthcheck
+              curl
+            ] ++ [
+              dockerTools.caCertificates
+              dockerTools.binSh
+            ];
+
+            config = {
+              Env = [
+                "LANG=en_US.UTF-8"
+                "LOCALE_ARCHIVE=${glibcLocalesUtf8}/lib/locale/locale-archive"
+                # required by fly.io
+                "ECTO_IPV6=true"
+                "ERL_AFLAGS='-proto_dist inet6_tcp'"
+              ];
+              WorkingDir = app;
+              Cmd = [ "${app}/bin/server" "start" ];
+            };
           };
-      in
-      {
-        devShells.default = shell;
-        packages.default = release;
-      }
-    );
+        });
+    };
 }
