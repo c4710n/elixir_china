@@ -1,5 +1,7 @@
 # ElixirChina
 
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
+
 > Promot Elixir in China, and guide more chinese developers to international community.
 
 To start your Phoenix server:
