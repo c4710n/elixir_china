@@ -13,6 +13,20 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
+## Docker
+
+### Build image
+
+```console
+$ nix build .#dockerImage --system x86_64-linux
+```
+
+### Push image
+
+```console
+$ nix build .#dockerImage --system x86_64-linux | docker load
+```
+
 ## Online Version
 
 Visit <https://elixir-china.zekedou.live>.
