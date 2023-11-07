@@ -24,7 +24,7 @@ $ nix build .#dockerImage --system x86_64-linux
 ### Push image
 
 ```console
-$ nix build .#dockerImage --system x86_64-linux | docker load
+$ $(nix build .#dockerImage --system x86_64-linux) | docker load
 ```
 
 ## Online Version
