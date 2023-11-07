@@ -20,12 +20,14 @@
         })
         nix-npm-buildpackage.overlays.default
       ];
+
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system overlays; };
+        hostPkgs = import nixpkgs { system = "x86_64-darwin"; inherit overlays; };
       });
     in
     {
-      devShells = forEachSupportedSystem ({ pkgs }: with pkgs; {
+      devShells = forEachSupportedSystem ({ pkgs, ... }: with pkgs; {
         default = mkShell {
           buildInputs = [
             elixir
@@ -66,7 +68,7 @@
         };
       });
 
-      packages = forEachSupportedSystem ({ pkgs }:
+      packages = forEachSupportedSystem ({ pkgs, hostPkgs }:
         with pkgs;
         let
           pname = "elixir_china";
@@ -113,22 +115,24 @@
               '';
             };
 
-          dockerImage = dockerTools.buildLayeredImage {
+          dockerImage = (dockerTools.override {
+            writePython3 = hostPkgs.buildPackages.writers.writePython3;
+          }).streamLayeredImage {
             name = pname;
             tag = "latest";
 
             contents = [
-              # requirements of mix release scripts
+              dockerTools.caCertificates
+              dockerTools.binSh
+            ] ++ [
+              # deps of scripts created by mix release
               coreutils
               gnused
               gnugrep
               gawk
 
-              # for healthcheck
+              # extra for healthcheck
               curl
-            ] ++ [
-              dockerTools.caCertificates
-              dockerTools.binSh
             ];
 
             config = {
