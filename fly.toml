@@ -8,6 +8,9 @@ primary_region = "hkg"
 kill_signal = "SIGTERM"
 kill_timeout = "5s"
 
+[build]
+  image = "registry.fly.io/elixir-china:0.1.0-64c24a9"
+
 [experimental]
   auto_rollback = true
 

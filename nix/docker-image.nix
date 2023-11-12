@@ -10,7 +10,6 @@
 let
   hostPkgs = import nixpkgs { system = hostSystem; };
 
-  name = release.pname;
   tag =
     if self ? shortRev then
       "${release.version}-${self.shortRev}"
@@ -20,7 +19,8 @@ in
 (dockerTools.override {
   writePython3 = hostPkgs.buildPackages.writers.writePython3;
 }).streamLayeredImage {
-  inherit name tag;
+  name = "registry.fly.io/elixir-china";
+  inherit tag;
 
   contents = [
     dockerTools.caCertificates

@@ -19,34 +19,35 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Deployment
 
-### Mix Release
-
-```
-$ nix build '.#release'
-```
-
-### Docker Image
-
-#### Build image
+### build Docker image
 
 ```console
-# build x86_64-linux image on x86_64-linux host
-$ nix build .#packages.x86_64-linux.docker-image-triggered-by-x86_64-linux
-
 # build x86_64-linux image on x86_64-darwin host
 $ nix build .#packages.x86_64-linux.docker-image-triggered-by-x86_64-darwin
-
-# build x86_64-linux image on aarch64-darwin host
-$ nix build .#packages.x86_64-linux.docker-image-triggered-by-aarch64-darwin
+$ ./result | docker load
 
 # ...
 # run `nix flake show` to show more packages
 ```
 
-#### Push image
+### push Docker image
 
 ```console
-$ result | docker load
+$ flyctl auth docker
+$ docker push <image>
+```
+
+### update `fly.toml`
+
+```toml
+[build]
+  image = "<image>"
+```
+
+### deploy it
+
+```console
+$ flyctl deploy
 ```
 
 ## License
