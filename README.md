@@ -4,6 +4,12 @@
 
 > Promot Elixir in China, and guide more chinese developers to international community.
 
+## Online Version
+
+Visit <https://elixir-china.zekedou.live>.
+
+## Development
+
 To start your Phoenix server:
 
 - Run `mix setup` to install and setup dependencies
@@ -11,30 +17,38 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Deployment
 
-## Docker
+### Mix Release
 
-### Build image
-
-```console
-$ nix build .#dockerImage --system x86_64-linux
+```
+$ nix build '.#release'
 ```
 
-### Push image
+### Docker Image
+
+#### Build image
 
 ```console
-$ $(nix build .#dockerImage --system x86_64-linux) | docker load
+# build x86_64-linux image on x86_64-linux host
+$ nix build .#packages.x86_64-linux.docker-image-triggered-by-x86_64-linux
+
+# build x86_64-linux image on x86_64-darwin host
+$ nix build .#packages.x86_64-linux.docker-image-triggered-by-x86_64-darwin
+
+# build x86_64-linux image on aarch64-darwin host
+$ nix build .#packages.x86_64-linux.docker-image-triggered-by-aarch64-darwin
+
+# ...
+# run `nix flake show` to show more packages
 ```
 
-## Online Version
+#### Push image
 
-Visit <https://elixir-china.zekedou.live>.
+```console
+$ result | docker load
+```
 
-## Learn more
+## License
 
-- Official website: https://www.phoenixframework.org/
-- Guides: https://hexdocs.pm/phoenix/overview.html
-- Docs: https://hexdocs.pm/phoenix
-- Forum: https://elixirforum.com/c/phoenix-forum
-- Source: https://github.com/phoenixframework/phoenix
+MIT
