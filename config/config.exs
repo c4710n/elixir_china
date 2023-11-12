@@ -18,7 +18,7 @@ config :elixir_china, ElixirChinaWeb.Endpoint,
   live_view: [signing_salt: "d/qx8SDg"]
 
 # Configures Elixir's Logger
-config :logger, :console,
+config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
